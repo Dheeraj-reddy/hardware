@@ -1,0 +1,154 @@
+int time_slot=0;
+void setup()
+{
+  Serial.begin(9600);
+  
+  pinMode(2,OUTPUT);
+  pinMode(3,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);
+  pinMode(9,OUTPUT);
+  pinMode(10,OUTPUT);
+  pinMode(11,OUTPUT);
+  pinMode(12,OUTPUT);
+  pinMode(13,OUTPUT);
+  
+}
+
+void loop()
+{
+  if(Serial.available()>0)
+    time_slot=Serial.read();
+  if(time_slot=='1')
+  {  for(int i=0;i<10;i++)
+  {
+	blink();
+    delay(1000);
+    signalblink();
+    delay(1000);
+    
+    
+  }
+
+  }
+  else if(time_slot=='2'||time_slot=='4'){
+     signalgreen(1); 
+  signalred(2);
+    signalred(3);
+    signalred(4);
+  delay(3000);
+  signalyellow(1);
+    signalred(2);
+    signalred(3);
+    signalred(4);
+  delay(1000);
+signalgreen(2); 
+  signalred(1);
+    signalred(3);
+    signalred(4);
+  delay(3000);
+  signalyellow(2);
+    signalred(1);
+    signalred(3);
+    signalred(4);
+  delay(1000);
+signalgreen(3); 
+  signalred(2);
+    signalred(1);
+    signalred(4);
+  delay(3000);
+  signalyellow(3);
+    signalred(2);
+    signalred(1);
+    signalred(4);
+  delay(1000);
+signalgreen(4); 
+  signalred(2);
+    signalred(3);
+    signalred(1);
+  delay(3000);
+  signalyellow(4);
+    signalred(2);
+    signalred(3);
+    signalred(1);
+  delay(1000);
+
+  
+  }
+  else if(time_slot=='3')
+  {
+    signalgreen(2); 
+  signalred(1);
+    signalred(3);
+    signalgreen(4);
+  delay(3000);
+  signalyellow(2);
+    signalred(1);
+    signalred(3);
+    signalyellow(4);
+  delay(1000);
+    signalgreen(1); 
+  signalred(2);
+    signalred(4);
+    signalgreen(3);
+  delay(3000);
+  signalyellow(1);
+    signalred(2);
+    signalred(4);
+    signalyellow(3);
+  delay(1000);
+
+
+  }
+  
+  
+}
+void signalred(int i)
+{
+  digitalWrite(3*i-1,HIGH);
+   
+  digitalWrite(3*i,LOW);
+  digitalWrite(3*i+1,LOW);
+  
+}
+void signalyellow(int i)
+{
+  digitalWrite(3*i-1,LOW);
+  digitalWrite(3*i,HIGH);
+  digitalWrite(3*i+1,LOW);
+
+ 
+}
+void signalgreen(int i)
+{
+  digitalWrite(3*i-1,LOW);
+  digitalWrite(3*i,LOW);
+  digitalWrite(3*i+1,HIGH);
+}
+void signalyellowoff(int i)
+{
+  digitalWrite(3*i-1,LOW);
+  digitalWrite(3*i,LOW);
+  digitalWrite(3*i+1,LOW);
+
+}
+void blink()
+{
+  signalyellow(1);
+  signalyellow(2);
+  
+  signalyellow(3);
+  
+  signalyellow(4);
+
+}
+void signalblink()
+{
+  signalyellowoff(1);
+  signalyellowoff(2);
+  signalyellowoff(3);
+  signalyellowoff(4);
+}
